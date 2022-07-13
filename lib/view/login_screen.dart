@@ -2,6 +2,8 @@ import 'package:auth/api/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'home_page.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -31,9 +33,22 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     ));
-  }
 
-  Future<void> signIn() async {
-    GoogleSignInApi.signIn();
+ 
   }
+    Future signIn() async {
+    final user = await GoogleSignInApi.signIn();
+    if(user == null){
+      Scaffold.of(context).showSnackBar(const SnackBar(
+        content: Text('Login failed'),
+      ));
+      
+    }
+    else{
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(user: user)));
+    }
+  }
+ 
 }
+
+

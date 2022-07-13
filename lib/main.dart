@@ -1,5 +1,7 @@
 import 'package:auth/view/login_screen.dart';
+import 'package:auth/view/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,6 +9,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  
 
   // This widget is the root of your application.
   @override
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:const LoginScreen(),
+      home:const Wrapper(),
     );
   }
 
