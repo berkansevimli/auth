@@ -16,26 +16,40 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    String name = widget.user.displayName!;
+    String email = widget.user.email;
+    String photoUrl =
+        widget.user.photoUrl == null ? "default" : widget.user.photoUrl!;
+    String id = widget.user.id;
+    String serverAuthCode = widget.user.serverAuthCode == null
+        ? "default"
+        : widget.user.serverAuthCode!;
+
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Welcome ${widget.user.displayName}',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        ElevatedButton.icon(
-            onPressed: signOut,
-            icon: const FaIcon(FontAwesomeIcons.google),
-            label: const Text('Logout')),
-      ],
+        body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "name: $name\nemail: $email\nphotoUrl: $photoUrl\nid: $id\nserverAuthCode: $serverAuthCode",
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+              onPressed: signOut,
+              icon: const FaIcon(FontAwesomeIcons.google),
+              label: const Text('Logout')),
+        ],
+      ),
     ));
   }
+
   Future signOut() async {
     await GoogleSignInApi.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }
